@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        strong {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fake News Detector</h1>
+    
+    {% if not predictions %}
+    <form method="POST">
+        <textarea name="news" rows="10" cols="50" placeholder="Enter news text here..."></textarea><br>
+        <button type="submit">Check News</button>
+    </form>
+    {% endif %}
+
+    {% if predictions %}
+    <h2>Results for your news:</h2>
+    <ul>
+        <li><strong>Logistic Regression:</strong> {{ predictions['LR'] }}</li>
+        <li><strong>Decision Tree:</strong> {{ predictions['DT'] }}</li>
+        <li><strong>Random Forest:</strong> {{ predictions['RF'] }}</li>
+    </ul>
+    
+    <!-- Button to add news again -->
+    <form method="GET">
+        <button type="submit">Add News Again</button>
+    </form>
+    {% endif %}
+</body>
+</html>
